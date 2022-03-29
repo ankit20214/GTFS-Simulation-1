@@ -1,4 +1,4 @@
-import json, re, datetime, time,timeloop
+import json, re, datetime, time
 
 
 def load_stops_data():
@@ -12,7 +12,7 @@ def load_stops_data():
         stop_lat_long_info[stops_data[i][0]] = [stops_data[i][3], stops_data[i][4]]
         stop_name[stops_data[i][0]] = stops_data[i][2]
 
-    return stop_lat_long_info,stop_name
+    return stop_lat_long_info, stop_name
 
 
 def create_json(trip_id, start_time, start_date, route_id, lat_long):
@@ -28,24 +28,12 @@ def create_json(trip_id, start_time, start_date, route_id, lat_long):
     return m
 
 
-def find_transit_vehicle():
-    print( datetime.datetime.now().time())
-    st = time.time()
+def collect_data():
     stop_times = open('stop_times.txt', 'r')
     stop_times_data = stop_times.readlines()
     stop_times.close()
 
     stops_lat_long, stop_name = load_stops_data()
-
-    current_time = datetime.datetime.now().time()
-
-    # current_time = '08:05:50'
-    # obj = datetime.datetime.strptime(current_time, '%H:%M:%S')
-    # current_time = obj.time()
-
-    date_today = datetime.datetime.today().strftime('%Y%m%d')
-
-    transit_trip_id = []
 
     stop_ids = []
     index = []
@@ -59,12 +47,35 @@ def find_transit_vehicle():
                 stop_ids += [stop_times_data[i][0]]
                 index += [i]
     index += [len(stop_times_data) - 1]
+
+    trips = open('trips.txt', 'r')
+    trips_data = trips.readlines()
+    trips.close()
+
+    route_ids = {}
+    for i in range(len(trips_data)):
+        trips_data[i] = trips_data[i].split(',')
+        route_ids[trips_data[i][2]] = trips_data[i][0]
+
+    return stop_times_data, stops_lat_long, stop_name, index, route_ids
+
+
+def find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, route_ids):
+    # print( datetime.datetime.now().time())
+    st = time.time()
+
+    current_time = datetime.datetime.now().time()
+
+    date_today = datetime.datetime.today().strftime('%Y%m%d')
+
+    transit_trip_id = []
+
     transit_stop_id = []
 
-    outfile = open('final_json.json', 'w')
+    outfile = open('final_json.json', 'w+')
     outfile.write('[\n')
     transit_found = False
-    route_data_file = open('route_data_file.json','w+')
+    route_data_file = open('route_data_file.json', 'w+')
     route_data_file.write('[\n')
     for i in range(len(index) - 1):
         low = index[i]
@@ -93,7 +104,7 @@ def find_transit_vehicle():
                     transit_trip_id += [stop_times_data[mid][0]]
                     transit_stop_id += [current_data[3]]
                     json_transit_data = create_json(current_data[0], current_time, date_today,
-                                                    current_data[0].split('_')[0], stops_lat_long[current_data[3]])
+                                                    route_ids[current_data[0]], stops_lat_long[current_data[3]])
                     if len(transit_trip_id) != 1:
                         outfile.write(',\n')
                     outfile.write(json_transit_data)
@@ -108,7 +119,7 @@ def find_transit_vehicle():
             covered_route = []
             remaining_route = []
             reached = False
-            for j in range(index[i],index[i+1]):
+            for j in range(index[i], index[i + 1]):
                 if not reached:
                     covered_route += [stop_name[stop_times_data[j][3]]]
                     if stop_times_data[j][3] == transit_stop_id[-1]:
@@ -121,7 +132,6 @@ def find_transit_vehicle():
                 route_data_file.write(',\n')
             route_data_file.write(json.dumps(route_map, indent=4))
 
-    
     outfile.write(']\n')
     outfile.close()
     route_data_file.write(']\n')
@@ -132,11 +142,12 @@ def find_transit_vehicle():
 
 
 def main():
+    stop_times_data, stops_lat_long, stop_name, index, route_ids = collect_data()
     while True:
         st = time.time()
-        find_transit_vehicle()
+        find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, route_ids)
         en = time.time()
-        time.sleep(30-(en-st) % 60)
+        time.sleep(30 - (en - st) % 60)
 
 
 if __name__ == '__main__':
