@@ -7,6 +7,9 @@ def load_stops_data():
     stops.close()
     stop_lat_long_info = {}
     stop_name = {}
+
+    stops_data = [i for i in stops_data if i != '\n']
+
     for i in range(1, len(stops_data)):
         stops_data[i] = list(stops_data[i].split(','))
         stop_lat_long_info[stops_data[i][0]] = [stops_data[i][3], stops_data[i][4]]
@@ -33,6 +36,8 @@ def collect_data():
     stop_times_data = stop_times.readlines()
     stop_times.close()
 
+    stop_times_data = [i for i in stop_times_data if i != '\n']
+
     stops_lat_long, stop_name = load_stops_data()
 
     stop_ids = []
@@ -51,6 +56,8 @@ def collect_data():
     trips = open('trips.txt', 'r')
     trips_data = trips.readlines()
     trips.close()
+
+    trips_data = [i for i in trips_data if i != '\n']
 
     route_ids = {}
     for i in range(len(trips_data)):
@@ -142,7 +149,9 @@ def find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, rout
 
 
 def main():
+
     stop_times_data, stops_lat_long, stop_name, index, route_ids = collect_data()
+
     while True:
         st = time.time()
         find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, route_ids)
