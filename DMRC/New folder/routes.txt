@@ -1,0 +1,41 @@
+route_short_name,route_long_name,route_type,route_id
+R_DR,RED_Dilshad Garden to Rithala,1,0
+R_DS,RED_Dilshad Garden to Shaheed Sthal (New Bus Adda),1,1
+Y_SV,YELLOW_Samaypur Badli to Vishwavidyalaya,1,2
+Y_QH,YELLOW_Qutab Minar to Huda City Centre,1,3
+Y_QV,YELLOW_Qutab Minar to Vishwavidyalaya,1,4
+B_DD,BLUE_Dwarka Sector - 21 to Dwarka,1,5
+B_DY,BLUE_Dwarka to Yamuna Bank,1,6
+B_YN,BLUE_Yamuna Bank to Noida Electronic City,1,7
+B_YV,BLUE_Yamuna Bank to Vaishali,1,8
+G_MA,GREEN_Mundka to Ashok Park Main,1,9
+G_KA,GREEN_Kirti Nagar - Inderlok to Ashok Park Main,1,10
+G_MB,GREEN_Mundka to Brigadier Hoshiyar Singh,1,11
+V_KB,VIOLET_Kashmere Gate to Badarpur Border,1,12
+V_BR,VIOLET_Badarpur Border to Raja Nahar Singh,1,13
+P_MM,PINK_Majlis Park to Maujpur - Babarpur,1,14
+P_MS,PINK_Maujpur - Babarpur to Shiv Vihar,1,15
+M_JB,MAGENTA_Janak Puri West to Botanical Garden,1,16
+G_DN,GRAY_Dwarka to Najafgarh,1,17
+O_DN,ORANGE/AIRPORT_Dwarka Sector - 21 to New Delhi,1,18
+R_SP,RAPID_Sector 55-56 (Rapid Metro) to Phase 3 (Rapid Metro),1,19
+R_DR_R,RED_Dilshad Garden to Rithala_Reverse,1,20
+R_DS_R,RED_Dilshad Garden to Shaheed Sthal (New Bus Adda)_Reverse,1,21
+Y_SV_R,YELLOW_Samaypur Badli to Vishwavidyalaya_Reverse,1,22
+Y_QH_R,YELLOW_Qutab Minar to Huda City Centre_Reverse,1,23
+Y_QV_R,YELLOW_Qutab Minar to Vishwavidyalaya_Reverse,1,24
+B_DD_R,BLUE_Dwarka Sector - 21 to Dwarka_Reverse,1,25
+B_DY_R,BLUE_Dwarka to Yamuna Bank_Reverse,1,26
+B_YN_R,BLUE_Yamuna Bank to Noida Electronic City_Reverse,1,27
+B_YV_R,BLUE_Yamuna Bank to Vaishali_Reverse,1,28
+G_MA_R,GREEN_Mundka to Ashok Park Main_Reverse,1,29
+G_KA_R,GREEN_Kirti Nagar - Inderlok to Ashok Park Main_Reverse,1,30
+G_MB_R,GREEN_Mundka to Brigadier Hoshiyar Singh_Reverse,1,31
+V_KB_R,VIOLET_Kashmere Gate to Badarpur Border_Reverse,1,32
+V_BR_R,VIOLET_Badarpur Border to Raja Nahar Singh_Reverse,1,33
+P_MM_R,PINK_Majlis Park to Maujpur - Babarpur_Reverse,1,34
+P_MS_R,PINK_Maujpur - Babarpur to Shiv Vihar_Reverse,1,35
+M_JB_R,MAGENTA_Janak Puri West to Botanical Garden_Reverse,1,36
+G_DN_R,GRAY_Dwarka to Najafgarh_Reverse,1,37
+O_DN_R,ORANGE/AIRPORT_Dwarka Sector - 21 to New Delhi_Reverse,1,38
+R_SP_R,RAPID_Sector 55-56 (Rapid Metro) to Phase 3 (Rapid Metro)_Reverse,1,39
