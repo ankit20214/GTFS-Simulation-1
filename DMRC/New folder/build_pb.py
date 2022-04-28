@@ -25,7 +25,7 @@ def load_stops_data():
 
 def create_json(trip_id, start_time, start_date, route_id, lat_long):
     global all_entities
-    vehicle_id = 'DTC' + str(route_id) + str(trip_id)
+    vehicle_id = 'DMRC' + str(route_id) + str(trip_id)
     entity = {'id': vehicle_id, 'vehicle': {
         'trip': {'trip_id': trip_id, 'start_time': start_time.strftime("%H:%M:%S"), 'start_date': str(start_date),
                  'route_id': route_id}, 'position': {'latitude': lat_long[0], 'longitude': lat_long[1]},
