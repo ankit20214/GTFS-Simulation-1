@@ -23,8 +23,7 @@ def load_stops_data():
     return stop_lat_long_info, stop_name
 
 
-def create_json(trip_id, start_time, start_date, route_id, lat_long):
-    global all_entities
+def create_json(trip_id, start_time, start_date, route_id, lat_long,all_entities):
     vehicle_id = 'DMRC' + str(route_id) + str(trip_id)
     entity = {'id': vehicle_id, 'vehicle': {
         'trip': {'trip_id': trip_id, 'start_time': start_time.strftime("%H:%M:%S"), 'start_date': str(start_date),
@@ -70,7 +69,7 @@ def collect_data():
 
 
 def write_proto_buffer_data(container):
-    file = open("proto_buffer_data.pb",'wb')
+    file = open('proto_buffer_data.pb','wb')
     file.write(container.SerializeToString())
     file.close()
 
@@ -114,7 +113,7 @@ def container_put_entities(all_entities):
 
 def find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, route_ids):
     # print( datetime.datetime.now().time())
-    global all_entities
+    all_entities = []
     st = time.time()
 
     current_time = datetime.datetime.now().time()
@@ -159,7 +158,7 @@ def find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, rout
                     # print(current_data[0],current_data[3])
                     # print(current_data[0], current_time, date_today,route_ids[current_data[0]], stops_lat_long[current_data[3]])
                     json_transit_data = create_json(current_data[0], current_time, date_today,
-                                                    route_ids[current_data[0]], stops_lat_long[current_data[3]])
+                                                    route_ids[current_data[0]], stops_lat_long[current_data[3]],all_entities)
                     if len(transit_trip_id) != 1:
                         outfile.write(',\n')
                     outfile.write(json_transit_data)
@@ -203,7 +202,7 @@ def main():
         st = time.time()
         find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, route_ids)
         en = time.time()
-        time.sleep(30 - (en - st) % 60)
+        time.sleep(10 - (en - st) % 60)
 
 
 if __name__ == '__main__':
