@@ -1,0 +1,43 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color,direction
+38,,M_JB_R,MAGENTA_Botanical Garden to Janak Puri West,,1,,,0
+37,,P_MS_R,PINK_Shiv Vihar to Maujpur - Babarpur,,1,,,0
+33,,G_MB_R,GREEN_Brigadier Hoshiyar Singh to Mundka,,1,,,0
+31,,G_KA_R,GREEN_Ashok Park Main to Kirti Nagar,,1,,,0
+29,,B_YV_R,BLUE_Vaishali to Yamuna Bank,,1,,,0
+12,,G_MB,GREEN_Mundka to Brigadier Hoshiyar Singh,,1,,,1
+39,,G_DN_R,GRAY_Najafgarh to Dwarka,,1,,,0
+11,,G_IA,GREEN_Inderlok to Ashok Park Main,,1,,,0
+18,,G_DN,GRAY_Dwarka to Najafgarh,,1,,,1
+9,,G_MA,GREEN_Mundka to Ashok Park Main,,1,,,0
+36,,P_MM_R,PINK_Maujpur - Babarpur to Majlis Park,,1,,,0
+1,,R_DS,RED_Dilshad Garden to Shaheed Sthal (New Bus Adda),,1,,,0
+22,,R_DS_R,RED_Shaheed Sthal (New Bus Adda) to Dilshad Garden,,1,,,1
+8,,B_YV,BLUE_Yamuna Bank to Vaishali,,1,,,1
+40,,O_DN_R,ORANGE/AIRPORT_New Delhi to Dwarka Sector - 21,,1,,,0
+0,,R_DR,RED_Dilshad Garden to Rithala,,1,,,0
+17,,M_JB,MAGENTA_Janak Puri West to Botanical Garden,,1,,,1
+41,,R_SP_R,RAPID_Phase 3 (Rapid Metro) to Sector 55-56 (Rapid Metro),,1,,,0
+28,,B_YN_R,BLUE_Noida Electronic City to Yamuna Bank,,1,,,0
+19,,O_DN,ORANGE/AIRPORT_Dwarka Sector - 21 to New Delhi,,1,,,1
+4,,Y_QV,YELLOW_Qutab Minar to Vishwavidyalaya,,1,,,0
+5,,B_DD,BLUE_Dwarka Sector - 21 to Dwarka,,1,,,0
+30,,G_MA_R,GREEN_Ashok Park Main to Mundka,,1,,,1
+6,,B_DY,BLUE_Dwarka to Yamuna Bank,,1,,,0
+3,,Y_QH,YELLOW_Qutab Minar to Huda City Centre,,1,,,0
+16,,P_MS,PINK_Maujpur - Babarpur to Shiv Vihar,,1,,,1
+7,,B_YN,BLUE_Yamuna Bank to Noida Electronic City,,1,,,1
+10,,G_KA,GREEN_Kirti Nagar to Ashok Park Main,,1,,,1
+35,,V_BR_R,VIOLET_Raja Nahar Singh to Badarpur Border,,1,,,0
+27,,B_DY_R,BLUE_Yamuna Bank to Dwarka,,1,,,1
+13,,V_KB,VIOLET_Kashmere Gate to Badarpur Border,,1,,,0
+15,,P_MM,PINK_Majlis Park to Maujpur - Babarpur,,1,,,1
+34,,V_KB_R,VIOLET_Badarpur Border to Kashmere Gate,,1,,,1
+14,,V_BR,VIOLET_Badarpur Border to Raja Nahar Singh,,1,,,1
+32,,G_IA_R,GREEN_Ashok Park Main to Inderlok,,1,,,1
+26,,B_DD_R,BLUE_Dwarka to Dwarka Sector - 21,,1,,,1
+20,,R_SP,RAPID_Sector 55-56 (Rapid Metro) to Phase 3 (Rapid Metro),,1,,,1
+21,,R_DR_R,RED_Rithala to Dilshad Garden,,1,,,1
+23,,Y_SV_R,YELLOW_Vishwavidyalaya to Samaypur Badli,,1,,,0
+24,,Y_QH_R,YELLOW_Huda City Centre to Qutab Minar,,1,,,1
+2,,Y_SV,YELLOW_Samaypur Badli to Vishwavidyalaya,,1,,,1
+25,,Y_QV_R,YELLOW_Vishwavidyalaya to Qutab Minar,,1,,,1
