@@ -61,7 +61,6 @@ def search_on_shapes(shape_id_distances,shape_id,dist):
             return i-1
 
 
-
 def binary_on_shapes(shape_id_coordinates, shape_id, dist,current_data):
     arr = shape_id_coordinates[shape_id]
     print(arr)
@@ -169,6 +168,14 @@ def collect_data():
                 index += [i]
     index += [len(stop_times_data) - 1]
 
+    averages = [[] for i in range(42)]
+    f = open('last_final.txt', 'r')
+    f_d = f.readlines()
+    f.close()
+    f_d = [f_d[i].strip() for i in range(len(f_d))]
+    f_d = [f_d[i].split(",") for i in range(len(f_d))]
+    for i in range(len(f_d)):
+        averages[int(f_d[i][-3])] += [f_d[i][-1]]
 
     trips = open('trips.txt', 'r')
     trips_data = trips.readlines()
@@ -181,7 +188,7 @@ def collect_data():
         route_ids[trips_data[i][2]] = trips_data[i][0]
         route_to_shape_mapping[trips_data[i][0]] = trips_data[i][-3]
 
-    return stop_times_data, stops_lat_long, stop_name, index, route_ids,route_to_shape_mapping
+    return stop_times_data, stops_lat_long, stop_name, index, route_ids,route_to_shape_mapping,averages
 
 
 def write_proto_buffer_data(container):
@@ -227,20 +234,22 @@ def container_put_entities(all_entities):
     return container
 
 
-def find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, route_ids,route_to_shape_mapping,shapes_data,shape_id_distances,shapes_id_coordinates):
+def find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, route_ids,route_to_shape_mapping,shapes_data,shape_id_distances,shapes_id_coordinates,averages):
     global route_average_speeds
     # print( datetime.datetime.now().time())
     all_entities = []
     st = time.time()
 
     current_time = datetime.datetime.now().time()
+    # c_t = '06:44:20'
+    # current_time = datetime.datetime.strptime(c_t, '%H:%M:%S').time()
 
     date_today = datetime.datetime.today().strftime('%Y%m%d')
 
     transit_trip_id = []
 
     transit_stop_id = []
-
+    temp_arr = []
     outfile = open('final_json.json', 'w+')
     outfile.write('[\n')
     transit_found = False
@@ -272,27 +281,28 @@ def find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, rout
                 if next_arr_time >= current_time:
                     transit_trip_id += [stop_times_data[mid][0]]
                     transit_stop_id += [current_data[3]]
-                    # print(current_data[0],current_data[3])
-                    # print(current_data[0], current_time, date_today,route_ids[current_data[0]], stops_lat_long[current_data[3]])
-
                     # --------------------------------------------------------------------------
                     #  New Code
                     travel_route = route_ids[current_data[0]]
-                    average_speed = route_average_speeds[travel_route]
+                    average_speed = averages[int(travel_route)]
                     time_diff = (current_time.second + current_time.minute*60 + current_time.hour*3600) - (dep_time.second + dep_time.minute*60 + dep_time.hour*3600)
-                    distace_travelled = float(current_data[-2]) + (average_speed*time_diff)
+                    distace_travelled = float(current_data[-2]) + (float(average_speed[int(current_data[4])])*time_diff)
                     if distace_travelled > float(next_stop_data[-2]):
                         distace_travelled = float(next_stop_data[-2]) - 1
                     r_shape_id = route_to_shape_mapping[travel_route]
                     shape_lat_long_index = search_on_shapes(shape_id_distances,r_shape_id,distace_travelled)
                     final_lat_long = shapes_id_coordinates[r_shape_id][shape_lat_long_index]
 
+                    print(current_data[0],distace_travelled)
                     # -----------------------------------------------------------------------
 
 
                     json_transit_data = create_json(current_data[0], current_time, date_today,
                                                     route_ids[current_data[0]], final_lat_long,
                                                     all_entities)
+                    if travel_route == "21":
+                        temp_arr += [final_lat_long]
+
                     if len(transit_trip_id) != 1:
                         outfile.write(',\n')
                     outfile.write(json_transit_data)
@@ -320,6 +330,7 @@ def find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, rout
                 route_data_file.write(',\n')
             route_data_file.write(json.dumps(route_map, indent=4))
 
+    print(temp_arr)
     outfile.write(']\n')
     outfile.close()
     container_put_entities(all_entities)
@@ -331,13 +342,15 @@ def find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, rout
 
 
 def main():
-    stop_times_data, stops_lat_long, stop_name, index, route_ids,route_to_shape_mapping = collect_data()
+    stop_times_data, stops_lat_long, stop_name, index, route_ids,route_to_shape_mapping,averages = collect_data()
     shapes_data,shape_id_distances,shapes_id_coordinates = read_shapes_data()
+
     while True:
         st = time.time()
-        find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, route_ids,route_to_shape_mapping,shapes_data,shape_id_distances,shapes_id_coordinates)
+        find_transit_vehicle(stop_times_data, stops_lat_long, stop_name, index, route_ids,route_to_shape_mapping,shapes_data,shape_id_distances,shapes_id_coordinates,averages)
         en = time.time()
-        time.sleep(10 - (en - st) % 60)
+        break
+        # time.sleep(10 - (en - st) % 60)
 
 
 if __name__ == '__main__':
